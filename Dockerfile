@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM node:16.17.1-alpine3.15
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "tsconfig.json*", "./"]
