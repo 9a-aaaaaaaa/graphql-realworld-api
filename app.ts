@@ -5,25 +5,22 @@ import {
 } from 'apollo-server-core'
 import express from 'express'
 import http from 'http'
-import typeDefs from './type-defs'
-import resolvers from './resolvers'
 import dataSources from './data-sources'
-import Users from './data-sources/user'
-import { User as UserModel } from './models'
+import { schema } from './type-defs/schema'
 
-async function startApolloServer(typeDefs: any, resolvers: any) {
+async function startApolloServer() {
   const app = express()
   const httpServer = http.createServer(app)
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
     csrfPrevention: true,
     cache: 'bounded',
-    //dataSources,
-    dataSources: () => ({
-      // OR
-      users: new Users(UserModel as any)
-    }),
+    dataSources,
+    // 所有的查询都会经过这里
+    context({ req }) {
+      const token = req.headers.authorization
+      return { token }
+    },
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageLocalDefault({ embed: true })
@@ -36,4 +33,4 @@ async function startApolloServer(typeDefs: any, resolvers: any) {
   console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
 }
 
-startApolloServer(typeDefs, resolvers)
+startApolloServer()

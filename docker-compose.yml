@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  quickstartnodetypescript:
+    image: quickstartnodetypescript
+    restart: always
+    # command: echo "hello world"  #bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm -v'
+    depends_on:
+      - mongo
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8000:8000
+  mongo: 
+    image: mongo:4.2.8
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - "./mongo/data/db:/mongo/data/db"
+      - "./mongo/log:/mongo/log" 
+    expose:
+      - "27017"    

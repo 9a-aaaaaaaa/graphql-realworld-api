@@ -15,7 +15,7 @@ export const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     set: (value: string) => md5(value),
-    select: false
+    select: false // 设置为fasle默认查询不到该字段
   },
   bio: {
     type: String,

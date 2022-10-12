@@ -7,5 +7,5 @@ export interface ArcticleInterface extends CreateTime {
   body: string
   tagList: string
   favoritesCount: number
-  author: Partial<UserInterface>
+  author?: Partial<UserInterface>
 }

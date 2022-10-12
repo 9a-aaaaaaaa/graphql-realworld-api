@@ -1,22 +1,25 @@
-'use strict'
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod }
-  }
-Object.defineProperty(exports, '__esModule', { value: true })
-exports.md5 = exports.decode = exports.verify = exports.sign = void 0
-const jsonwebtoken_1 = __importDefault(require('jsonwebtoken'))
-const util_1 = require('util')
-const crypto_1 = require('crypto')
-const { sign: sign2, verify: verify2, decode: decode2 } = jsonwebtoken_1.default
-exports.sign = (0, util_1.promisify)(sign2)
-exports.verify = (0, util_1.promisify)(verify2)
-exports.decode = (0, util_1.promisify)(decode2)
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getJwtSecret = exports.genergetToken = exports.md5 = void 0;
+const apollo_server_express_1 = require("apollo-server-express");
+const crypto_1 = require("crypto");
+const jsonwebtoken_1 = require("jsonwebtoken");
 function md5(str) {
-  return (0, crypto_1.createHash)('md5')
-    .update('I love cupcakes' + str)
-    .digest('hex')
+    return (0, crypto_1.createHash)('md5')
+        .update('I love cupcakes' + str)
+        .digest('hex');
 }
-exports.md5 = md5
+exports.md5 = md5;
+async function genergetToken(user, jwtSecret) {
+    const token = (0, jsonwebtoken_1.sign)({ userId: user._id }, jwtSecret, { expiresIn: 60 * 60 * 24 });
+    return token;
+}
+exports.genergetToken = genergetToken;
+function getJwtSecret() {
+    const jwtSecret = process.env.jwtSecret;
+    if (!jwtSecret)
+        throw new apollo_server_express_1.UserInputError('配置文件 jwtSecret not founded');
+    return jwtSecret;
+}
+exports.getJwtSecret = getJwtSecret;
 //# sourceMappingURL=index.js.map
