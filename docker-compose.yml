@@ -24,3 +24,4 @@ services:
       - "./mongo/log:/mongo/log" 
     expose:
       - "27017"    
+      
