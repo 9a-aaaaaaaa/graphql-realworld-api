@@ -1,1 +1,0 @@
-{"version":3,"file":"base_model.js","sourceRoot":"","sources":["../../models/base_model.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,SAAS,EAAE;QACT,IAAI,EAAE,IAAI;QACV,OAAO,EAAE,IAAI,CAAC,GAAG;KAClB;IACD,QAAQ,EAAE;QACR,IAAI,EAAE,IAAI;QACV,OAAO,EAAE,IAAI,CAAC,GAAG;KAClB;CACF,CAAA"}

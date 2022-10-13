@@ -1,8 +1,4 @@
-# nodejs typescript express
-
-The most convenient combination of nodejs and typescript makes it easy to start a project quickly, reducing project configuration time.
-
-If you don't like Express, you can just replace the app. No other files need to be changed. `app.js`
+# graphql-realworld-api
 
 # 
 ```
